@@ -47,7 +47,8 @@ pipeline {
         steps {
                 script {
                     sh """
-                    sed 's|__BUILD_NUMBER__|${IMAGE_TAG}|g' deployment.yaml
+                    echo "IMAGE_TAG is: ${IMAGE_TAG}"
+                    sed -i 's|__BUILD_NUMBER__|${IMAGE_TAG}|g' deployment.yaml
                     kubectl apply -f deployment.yaml
                     """
                 }
