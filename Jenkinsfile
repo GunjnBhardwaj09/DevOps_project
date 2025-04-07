@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Deploy as container') {
             steps {
-                   sh 'docker run -itd -P dockerhub696/abc_tech:$BUILD_NUMBER'
+                   sh 'docker run -itd -p 8081:8080 dockerhub696/abc_tech:$BUILD_NUMBER'
                 }
         }
         stage('Deploy to Minikube') {
