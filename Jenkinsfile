@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
     MINIKUBE_HOME = "/var/lib/jenkins/.minikube"
-    IMAGE_TAG = '$BUILD_NUMBER'
+    IMAGE_TAG = "${BUILD_NUMBER}"
     }
     stages {
         stage('Code Checkout') {
