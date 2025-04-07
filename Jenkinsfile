@@ -27,19 +27,19 @@ pipeline {
          stage('Build Docker Image') {
             steps {
                 sh 'cp /var/lib/jenkins/workspace/$JOB_NAME/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/$JOB_NAME/ABCtechnologies-1.0.war'  
-                sh 'docker build -t dockerhub696/abc_tech:$BUILD_NUMBER .'
+                sh 'docker build -t dockerhub696/abctech:$BUILD_NUMBER .'
             }
         }
         stage('Push Docker Image') {
             steps {
                 withDockerRegistry([credentialsId: 'docker-credentials', url: '']) {
-                    sh 'docker push dockerhub696/abc_tech:$BUILD_NUMBER'
+                    sh 'docker push dockerhub696/abctech:$BUILD_NUMBER'
                 }
             }
         }
         stage('Deploy as container') {
             steps {
-                   sh 'docker run -itd -p 8081:8080 dockerhub696/abc_tech:$BUILD_NUMBER'
+                   sh 'docker run -itd -p 8081:8080 dockerhub696/abctech:$BUILD_NUMBER'
                 }
         }
         stage('Deploy to Minikube') {
