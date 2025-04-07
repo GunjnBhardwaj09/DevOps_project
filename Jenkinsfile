@@ -43,10 +43,10 @@ pipeline {
                 }
         }
         stage('Deploy to Minikube') {
-            steps {
-                sh 'kubectl apply -f deployment.yaml'
-            }
+        steps {
+            sh "sed 's/\${BUILD_NUMBER}/$BUILD_NUMBER/g' deployment.yaml > deployment-temp.yaml" sh 'kubectl apply -f deployment-temp.yaml'
         }
+}
       
     }
 }
