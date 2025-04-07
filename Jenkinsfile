@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+    MINIKUBE_HOME = "/var/lib/jenkins/.minikube"
+    }
     stages {
         stage('Code Checkout') {
             steps {
