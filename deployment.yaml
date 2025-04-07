@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: abctech
-        image: dockerhub696/abc_tech:latest
+        image: dockerhub696/abc_tech:$BUILD_NUMBER
         ports:
         - containerPort: 8080
 ---
