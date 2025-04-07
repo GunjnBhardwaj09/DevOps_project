@@ -47,7 +47,7 @@ pipeline {
         steps {
                 script {
                     sh """
-                    sed 's|__BUILD_NUMBER__|${IMAGE_TAG}|g' deployment.yaml.template > deployment.yaml
+                    sed 's|__BUILD_NUMBER__|${IMAGE_TAG}|g' deployment.yaml
                     kubectl apply -f deployment.yaml
                     """
                 }
