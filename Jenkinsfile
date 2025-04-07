@@ -39,6 +39,11 @@ pipeline {
                    sh 'docker run -itd -P dockerhub696/abc_tech:$BUILD_NUMBER'
                 }
         }
+        stage('Deploy to Minikube') {
+            steps {
+                sh 'kubectl apply -f deployment.yaml'
+            }
+        }
       
     }
 }
