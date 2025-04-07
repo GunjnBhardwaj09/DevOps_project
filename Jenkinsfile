@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
     MINIKUBE_HOME = "/var/lib/jenkins/.minikube"
+    IMAGE_TAG = '$BUILD_NUMBER'
     }
     stages {
         stage('Code Checkout') {
@@ -44,8 +45,13 @@ pipeline {
         }
         stage('Deploy to Minikube') {
         steps {
-            sh "sed 's/\${BUILD_NUMBER}/$BUILD_NUMBER/g' deployment.yaml > deployment-temp.yaml" sh 'kubectl apply -f deployment-temp.yaml'
-        }
+                script {
+                    sh """
+                    sed 's|__BUILD_NUMBER__|${IMAGE_TAG}|g' deployment.yaml.template > deployment.yaml
+                    kubectl apply -f deployment.yaml
+                    """
+                }
+            }
 }
       
     }
