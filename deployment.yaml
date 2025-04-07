@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ABCtechnologies-1.0-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ABCtechnologies-1.0
+  template:
+    metadata:
+      labels:
+        app: ABCtechnologies-1.0
+    spec:
+      containers:
+      - name: ABCtechnologies-1.0
+        image: dockerhub696/ABCtechnologies-1.0:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ABCtechnologies-1.0-service
+spec:
+  selector:
+    app: ABCtechnologies-1.0
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: NodePort
